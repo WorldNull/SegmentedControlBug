@@ -22,8 +22,9 @@
 
 import UIKit
 import MXSegmentedPager
+import KASlideShow
 
-class MXViewController: MXSegmentedPagerController {
+class MXViewController: MXSegmentedPagerController, KASlideShowDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +33,18 @@ class MXViewController: MXSegmentedPagerController {
         
         // Parallax Header       
         self.segmentedPager.parallaxHeader.view = MXHeaderView.instanceFromNib();
-        let headerImageView = self.segmentedPager.parallaxHeader.view?.subviews[0] as! UIImageView
+        let headerImageView = self.segmentedPager.parallaxHeader.view?.subviews[0] as! KASlideShow
+        headerImageView.delegate = self
+        headerImageView.delay = 1
+        headerImageView.transitionDuration = 0.5
+        headerImageView.transitionType = .Slide
+        headerImageView.imagesContentMode = .ScaleAspectFill
+        headerImageView.addImagesFromResources(["test_1.jpeg","test_2.jpeg","test_3.jpeg"])
+        headerImageView.start()
+
         
-        headerImageView.image = UIImage(named: "success-baby")
+        
+        // headerImageView.image = UIImage(named: "success-baby")
         self.segmentedPager.parallaxHeader.mode = MXParallaxHeaderMode.Fill;
         self.segmentedPager.parallaxHeader.height = 370/*370*/;
         self.segmentedPager.parallaxHeader.minimumHeight = 80;
@@ -50,6 +60,8 @@ class MXViewController: MXSegmentedPagerController {
         self.segmentedPager.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe
         self.segmentedPager.segmentedControl.selectionIndicatorColor = UIColor.orangeColor()
         
+        execute()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,6 +73,19 @@ class MXViewController: MXSegmentedPagerController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         navigationController?.navigationBar.shadowImage = UIImage()
 
+    }
+    
+    func execute() {
+        let apiKey = NSProcessInfo.processInfo().environment["f5rj7w949s29jfu8c5g7jh4q"]
+        let apiSecret = NSProcessInfo.processInfo().environment["rYZK8n9gaaavQHPPqByVVSUawajp6eFN6Z9jAA3z2N6kY"]
+        let connectSdks = ConnectSdk(apiKey: apiKey, andApiSecret: apiSecret)
+        
+        // connectSDK.Search().Images().withPhrase("dog")
+        let imagesResponse = connectSdks.Search().Images().withPhrase("dog").Execute()
+        print("images: \(imagesResponse)")
+        
+        
+        
     }
     
     override func segmentedPager(segmentedPager: MXSegmentedPager, titleForSectionAtIndex index: Int) -> String {
