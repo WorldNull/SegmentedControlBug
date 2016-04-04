@@ -1,0 +1,26 @@
+PODS:
+  - HMSegmentedControl (1.5.2)
+  - KASlideShow (2.2)
+  - MXPagerView (0.1.2)
+  - MXParallaxHeader (0.4.3)
+  - MXSegmentedPager (3.0.4):
+    - HMSegmentedControl (~> 1.5.2)
+    - MXPagerView (~> 0.1.2)
+    - MXParallaxHeader (~> 0.4.3)
+
+DEPENDENCIES:
+  - KASlideShow (~> 2.2)
+  - MXSegmentedPager (from `../`)
+
+EXTERNAL SOURCES:
+  MXSegmentedPager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
+  KASlideShow: 380f5ecee5f14370c9435ecedccee5b35fb69c5f
+  MXPagerView: b0cc1695ff8470a1bb1628e25e8878eb94606a60
+  MXParallaxHeader: 96d9e7c392a26b29b97ddc34bff904a9c0baef27
+  MXSegmentedPager: 48a6129c823a3a5c6f5809c43463dbdf8351f528
+
+COCOAPODS: 0.39.0
